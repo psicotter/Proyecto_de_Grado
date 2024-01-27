@@ -10,9 +10,9 @@
 Paso 1: Definir clases
 Paso 2: Recopilar imágenes
 Paso 3: Organizar las imágenes
-Paso 4: Etiquetar las imágenes
+Paso 4: Etiquetar las imágenes -> Mañana
 Paso 5: Dividir el conjunto de datos
 Paso 6: Preprocesamiento (opcional)
 Paso 7: Crear un conjunto de datos en el formato adecuad
 2. Desarrollar el modelo de clasificacion cnn, esto con tensor flow. https://www.youtube.com/watch?v=j6eGHROLKP8
-3. UI (USer interface) para hacer la clasificacion en tiempo real.
+3. UI (User interface) para hacer la clasificacion en tiempo real. (Opcional//Simple). TensorFlow.js
