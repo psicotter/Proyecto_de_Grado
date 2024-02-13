@@ -32,7 +32,7 @@ class descriptor_archivos:
         )
 
         ## Orgnaizacion automatica de archivos
-        self.organizar_archivos()
+        ## self.organizar_archivos()
 
     def init_ruta_img(self) -> bool:
         ruta_imgs = "/assets/imgs/all_imgs"
