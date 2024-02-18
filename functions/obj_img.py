@@ -89,7 +89,8 @@ class lectorImagen:
 
         # Lectura de brillo
         brillo_img = int(img_to_mod.mean())
-
+        contraste_img = int(img_to_mod.std())
+        #print(f"Contraste original: {contraste_img}")
         ## Ajuste de tonalidades de brillo y extraccion de treshold
         if brillo_img < 240:
             # Ajuste de brillo
@@ -99,17 +100,16 @@ class lectorImagen:
                 img_to_mod, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
                 cv2.THRESH_BINARY, 11, 2
             )
-        # Modificacion a imagenes con brillo adecuado
-        # else:
-        #     _, img_to_mod = cv2.threshold(
-        #         img_to_mod, 125, 255,
-        #         cv2.THRESH_BINARY
-        #     )
+        elif  brillo_img > 240 and contraste_img < 40:
+            _, imagen_binaria = cv2.threshold(img_to_mod, 230, 255, cv2.THRESH_BINARY)
+            img_to_mod = cv2.convertScaleAbs(imagen_binaria, alpha=2.0, beta=0)
 
+        
         self.img = img_to_mod
         # Segunda modificacion
         blur = cv2.GaussianBlur(img_to_mod,(5,5),0)
         _, th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        
         self.img_mod = th3
 
     def extraccion_contornos(self):
@@ -131,17 +131,24 @@ class lectorImagen:
         image_number = 0
         for c in cnts:
             x, y, w, h = cv2.boundingRect(c)
+            #print(f"El controno {image_number} tiene un ancho {w} y un algo {h} ")
             area_temp = w*h
             if area_temp > area_l:
                 pos_maximas = [x, y, w, h]
-            #cv2.rectangle(img_process, (x, y), (x + w, y + h), (36, 255, 12), 2)
+                area_l = area_temp
+            
+            cv2.rectangle(img_process, (x, y), (x + w, y + h), (36, 255, 12), 2)
             #ROI = img_process[y:y+h, x:x+w]
+            #self.show_img(img_process, "prueba", False)
             #cv2.imwrite("ROI_{}.png".format(image_number), ROI)
-            #image_number += 1
+            image_number += 1
+        
         self.img_mod = self.img_mod[
             pos_maximas[1]: pos_maximas[1] + pos_maximas[3],
             pos_maximas[0]: pos_maximas[0] + pos_maximas[2]
         ]
+        ##self.show_img(self.img_mod, val_objeto = False)
+        # self.show_img(self.img_mod, val_objeto = False)
         self.func_resize(ancho = 262, alto = 212, val_re = False)
         #self.show_img(imagen = self.img_mod, val_objeto = False)
 
