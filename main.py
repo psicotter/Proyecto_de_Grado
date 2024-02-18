@@ -21,7 +21,7 @@ if __name__ == "__main__":
     tiempo_inicio = time()
     # Primero validamos la existencia de archivos.
     desc_m = descriptor_archivos(getcwd())
-
+    
     # Se realiza una validacion de que la lista de imagenes existentes sea mayor a 0
     while True:
         # Validacion de final de la lista de objetos, o lista de objetos a preprocesar vacios
@@ -36,7 +36,7 @@ if __name__ == "__main__":
         # ra con el contraste, brillo y detalles de tal manera que cada uno de los dibujos sea correctamente ##
         # identificado y extraiido para su posterior almacenamiento en el dataset #############################
         #######################################################################################################
-        ## Inicio de procesamiento de imagenes
+        ## Inicio dew procesamiento de imagenes
         img_leida = lectorImagen(
             ruta = desc_m.lista_imgs[CONT_IMG_PROCS][-1]
         )
